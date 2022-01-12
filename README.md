@@ -11,10 +11,10 @@ You can access the code stored in the shared memory through shmget and shmat.
 Since the key value of the shrared memory is stored as 1234, when requesting the shared memory segment, the key value is set to 1234.
 Stores a pointer to a shared memory segment in Operation.
 
-2. code 영역의 함수는 수정 불가능 하기 때문에 write권한 있는 영역으로 복사
-1)에서 접근한 코드는 직접 수정할 수 없기 때문에 write권한이 있는 영역을 할당해 줘야한다.
-이때 영역을 할당하는 함수는 drecompile_init()함수이다.
-mmap이라는 함수를 사용해서 영역을 할당하라는 제한이 있었기 때문에 mmap을 사용하기 위해 t라는 파일을 생성하고 write로 해당 파일에 문자를 쓴 뒤 mmap을 이용해 영역을 할당했다.
+2. Since the function in the code area cannot be modified, it is copied to the area with write permission.
+Since the code accessed in 1) cannot be directly modified, an area with write permission must be allocated.
+Allocate the area using the drecompile_init() function.
+I created a file called t, wrote a character to the file with write, and allocated an area using mmap.
 이때 write를 한 이유는 아무것도 쓰지 않은 상태에서 이후에 compiled_code에 값을 쓰면 에러가 발생해 write를 했다.
 마지막으로 strcpy를 통해 Operation에 있는 코드를 모두 compiled_code에 복사했다.
 

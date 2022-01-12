@@ -5,10 +5,11 @@ After accessing the shared memory using D_recompile.c, copy the code and optimiz
 Duplicate operations are optimized by combining, and after optimization, the code is executed and the code is implemented so that the times before and after optimization are output respectively.
 
 - How to implement
-1. shared memory에서 컴파일 된 코드 접근
-shared memory를 접근하는 함수는 sharedmem_init()함수로 shmget과 shmat을 통해 shared memory의 저장된 code를 접근할 수 있다.
-이전에 shrared memory key값을 1234로한 뒤 저장했기 때문에 shared memory segment를 요청할 때 key값을 1234로 준다.
-이후 Operation에 shared memory segment의 pointer를 저장한다.
+1. Accessing compiled code in shared memory
+The sharedmem_init() function is a function that accesses shared memory.
+You can access the code stored in the shared memory through shmget and shmat.
+Since the key value of the shrared memory is stored as 1234, when requesting the shared memory segment, the key value is set to 1234.
+Stores a pointer to a shared memory segment in Operation.
 
 2. code 영역의 함수는 수정 불가능 하기 때문에 write권한 있는 영역으로 복사
 1)에서 접근한 코드는 직접 수정할 수 없기 때문에 write권한이 있는 영역을 할당해 줘야한다.

@@ -15,8 +15,8 @@ Stores a pointer to a shared memory segment in Operation.
 Since the code accessed in 1) cannot be directly modified, an area with write permission must be allocated.
 Allocate the area using the drecompile_init() function.
 I created a file called t, wrote a character to the file with write, and allocated an area using mmap.
-이때 write를 한 이유는 아무것도 쓰지 않은 상태에서 이후에 compiled_code에 값을 쓰면 에러가 발생해 write를 했다.
-마지막으로 strcpy를 통해 Operation에 있는 코드를 모두 compiled_code에 복사했다.
+If you write a value to compiled_code without writing anything, an error occurs and you write to the file.
+Finally, I copied the compiled code into Operation via strcpy.
 
 3. 함수를 최적화 및 수정 (0으로 나누기, -로 인한 음수처리 없음)
 함수를 최적화하는 부분은 drecompile()함수이다.

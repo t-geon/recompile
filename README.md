@@ -18,12 +18,13 @@ I created a file called t, wrote a character to the file with write, and allocat
 If you write a value to compiled_code without writing anything, an error occurs and you write to the file.
 Finally, I copied the compiled code into Operation via strcpy.
 
-3. 함수를 최적화 및 수정 (0으로 나누기, -로 인한 음수처리 없음)
-함수를 최적화하는 부분은 drecompile()함수이다.
-해당 함수에서는 add, sub, imul, div명령어를 최적화한다.
-compiled_code가 unit8_t이기 때문에 값이 128인경우부터 -128으로 인식한다.
-즉 부호가 있는 값으로 인식하면 8비트 이상의 값은 overflow가 발생한 bit는 버리고 계산하기 때문에 해당 최적화를 할 때 0x80값이 넘기 전에 1번 명령어를 완성한 뒤 다시 최적화하는 방향으로 프로그래밍을 진행했다.
-op에 명령어, o1에 1번째 operand, o2에 2번째 operand를 저장해서 op과 o1이 같으면 같은 명령어이기 때문에 add, sub의 경우 o2에 더하고 imul의 경우 o2에 곱한다.
+3. Optimize and modify the function (divide by zero, no negative due to -)
+The part that optimizes the function is the drecompile() function.
+In this function, the add, sub, imul, and div commands are optimized.
+Since compiled_code is unit8_t, the value is recognized as -128 from 128.
+That is, if it is recognized as a signed value, 8 bits or more are discarded and calculated.
+Therefore, when optimizing, programming was carried out in the direction of optimizing again after completing the instruction before the 0x80 value.
+The instruction is stored in op, the 1st operand in o1, and the 2nd operand in o2. If op and o1 are the same, it is the same instruction. For add and sub, it is added to o2, and in the case of imul, it is multiplied by o2.
 div는 dl을 사용하는데 dl은 인자로 받은 값이 저장되어 있기 때문에 함수가 실행되기 전에 값을 알 수 없다
 즉 div를 최적화하기 위해서는 dl의 원래 값이 edx를 ebx에 저장해둔 후 ebx를 edx에 div가 나올 때 마다 곱해주면 중복된 div를 최적화해줄 수 있다.
 이 때 div보다 imul, mul연산이 더 짧은 시간 걸리기 때문에 최적화로 볼 수 있다.

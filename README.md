@@ -29,8 +29,8 @@ div uses dl. However, since the value received as an argument is stored in dl, t
 To optimize div, store edx, the original value of dl, in ebx, and then multiply ebx in edx every time a div appears to optimize the duplicate div.
 At this time, it can be seen as an optimization because imul and mul operations take shorter time than div.
 The moment when the optimized code is saved is when a duplicate operation occurs and then another operation occurs.
-add, sub, imul은 o2를 이용해 최적화하면 div는 위 방법처럼 최적화후 마지막은 div dl연산을 그대로 넣어 최적화한다.
-위에서 설명한 것과 같이 해당 범위를 넘으면 한번 쓴 뒤 다시 시작했다.
+Add, sub, and imul are optimized using o2, and div is optimized as above, and then div dl operation is added as it is and optimized.
+As described above, if the range is exceeded, the command is completed once and then restarted.
 num을 이용해 원본 코드를 계속 읽고 save를 통해 최적화 코드를 생성했다.
 check를 통해 새로운 명령어가 왔을 때 이전에 중복된 명령어가 왔었는지 판단해 코드를 최적화한다.
 

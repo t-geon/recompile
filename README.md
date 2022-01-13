@@ -31,8 +31,8 @@ At this time, it can be seen as an optimization because imul and mul operations 
 The moment when the optimized code is saved is when a duplicate operation occurs and then another operation occurs.
 Add, sub, and imul are optimized using o2, and div is optimized as above, and then div dl operation is added as it is and optimized.
 As described above, if the range is exceeded, the command is completed once and then restarted.
-num을 이용해 원본 코드를 계속 읽고 save를 통해 최적화 코드를 생성했다.
-check를 통해 새로운 명령어가 왔을 때 이전에 중복된 명령어가 왔었는지 판단해 코드를 최적화한다.
+I continued reading the original code using num and generated the optimization code through save.
+When a new instruction is issued through check, the code is optimized by determining whether a previously duplicate instruction has arrived.
 
 4. 수정 함수 실행 (수정함수에 execute 권한 추가(r-x))
 compiled_code영역에 저장된 코드를 실행하기 위해서는 실행권한이 있어야 한다.

@@ -25,9 +25,9 @@ Since compiled_code is unit8_t, the value is recognized as -128 from 128.
 That is, if it is recognized as a signed value, 8 bits or more are discarded and calculated.
 Therefore, when optimizing, programming was carried out in the direction of optimizing again after completing the instruction before the 0x80 value.
 The instruction is stored in op, the 1st operand in o1, and the 2nd operand in o2. If op and o1 are the same, it is the same instruction. For add and sub, it is added to o2, and in the case of imul, it is multiplied by o2.
-div는 dl을 사용하는데 dl은 인자로 받은 값이 저장되어 있기 때문에 함수가 실행되기 전에 값을 알 수 없다
-즉 div를 최적화하기 위해서는 dl의 원래 값이 edx를 ebx에 저장해둔 후 ebx를 edx에 div가 나올 때 마다 곱해주면 중복된 div를 최적화해줄 수 있다.
-이 때 div보다 imul, mul연산이 더 짧은 시간 걸리기 때문에 최적화로 볼 수 있다.
+div uses dl. However, since the value received as an argument is stored in dl, the value cannot be known before the function is executed.
+To optimize div, store edx, the original value of dl, in ebx, and then multiply ebx in edx every time a div appears to optimize the duplicate div.
+At this time, it can be seen as an optimization because imul and mul operations take shorter time than div.
 최적화된 코드가 저장되는 순간은 중복된 연산이 나오다가 다른 연산이 나온 경우이다.
 add, sub, imul은 o2를 이용해 최적화하면 div는 위 방법처럼 최적화후 마지막은 div dl연산을 그대로 넣어 최적화한다.
 위에서 설명한 것과 같이 해당 범위를 넘으면 한번 쓴 뒤 다시 시작했다.

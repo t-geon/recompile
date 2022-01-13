@@ -28,7 +28,7 @@ The instruction is stored in op, the 1st operand in o1, and the 2nd operand in o
 div uses dl. However, since the value received as an argument is stored in dl, the value cannot be known before the function is executed.
 To optimize div, store edx, the original value of dl, in ebx, and then multiply ebx in edx every time a div appears to optimize the duplicate div.
 At this time, it can be seen as an optimization because imul and mul operations take shorter time than div.
-최적화된 코드가 저장되는 순간은 중복된 연산이 나오다가 다른 연산이 나온 경우이다.
+The moment when the optimized code is saved is when a duplicate operation occurs and then another operation occurs.
 add, sub, imul은 o2를 이용해 최적화하면 div는 위 방법처럼 최적화후 마지막은 div dl연산을 그대로 넣어 최적화한다.
 위에서 설명한 것과 같이 해당 범위를 넘으면 한번 쓴 뒤 다시 시작했다.
 num을 이용해 원본 코드를 계속 읽고 save를 통해 최적화 코드를 생성했다.

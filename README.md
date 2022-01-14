@@ -37,5 +37,6 @@ When a new instruction is issued through check, the code is optimized by determi
 4. Execute the modified function (add execute permission to the modified function (r-x))
 To execute the code stored in the compiled_code area, you must have execution permission.
 All copied and optimized codes are stored in compiled_code.
-하지만 해당 영역은 읽기와 쓰기의 권한을 갖도록 설정해 뒀기 때문에 mprotect함수를 사용해 compiled_code영역을 읽기와 실행 권한으로 변경한다.
+However, the area is set to have read and write permissions.
+Use the mprotect function to change the compiled_code area to read and execute permissions.
 해당 영역의 권한을 바꿔주면 이전에 func에 저장해 둔 코드들을 실행할 수 있다.

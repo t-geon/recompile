@@ -34,7 +34,7 @@ As described above, if the range is exceeded, the command is completed once and 
 I continued reading the original code using num and generated the optimization code through save.
 When a new instruction is issued through check, the code is optimized by determining whether a previously duplicate instruction has arrived.
 
-4. 수정 함수 실행 (수정함수에 execute 권한 추가(r-x))
+4. Execute the modified function (add execute permission to the modified function (r-x))
 compiled_code영역에 저장된 코드를 실행하기 위해서는 실행권한이 있어야 한다.
 복사한코드나 최적화한 코드는 모두 compiled_code에 저장되어 있다.
 하지만 해당 영역은 읽기와 쓰기의 권한을 갖도록 설정해 뒀기 때문에 mprotect함수를 사용해 compiled_code영역을 읽기와 실행 권한으로 변경한다.

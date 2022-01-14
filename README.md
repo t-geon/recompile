@@ -39,4 +39,4 @@ To execute the code stored in the compiled_code area, you must have execution pe
 All copied and optimized codes are stored in compiled_code.
 However, the area is set to have read and write permissions.
 Use the mprotect function to change the compiled_code area to read and execute permissions.
-해당 영역의 권한을 바꿔주면 이전에 func에 저장해 둔 코드들을 실행할 수 있다.
+The code stored in func can be executed.
